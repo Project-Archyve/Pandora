@@ -4,12 +4,11 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import java.util.UUID
 
 @Entity
 data class Account(
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String = UUID.randomUUID().toString(),
+    val id: String,
     var firstName: String,
     var lastName: String,
     var email: String,

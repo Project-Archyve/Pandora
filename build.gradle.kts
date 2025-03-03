@@ -1,6 +1,7 @@
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
+	kotlin("plugin.serialization") version "1.9.25"
 	id("org.springframework.boot") version "3.4.3"
 	id("io.spring.dependency-management") version "1.1.7"
 	id("org.asciidoctor.jvm.convert") version "3.3.2"
@@ -40,6 +41,13 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	implementation(platform("io.github.jan-tennert.supabase:bom:3.1.1"))
+	implementation("io.github.jan-tennert.supabase:postgrest-kt")
+	implementation("io.github.jan-tennert.supabase:auth-kt")
+	implementation("io.github.jan-tennert.supabase:storage-kt")
+	implementation("io.github.jan-tennert.supabase:supabase-kt")
+	implementation("io.ktor:ktor-client-cio:2.3.10")
 }
 
 kotlin {

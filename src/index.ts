@@ -16,8 +16,10 @@ app.use(cors({
     allowedHeaders: 'Content-Type, Authorization'
 }))
 
-app.use("/api", accountRoutes)
+app.use("/api/v1", accountRoutes)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })
+
+export default app

@@ -3,21 +3,21 @@ import { Account } from "./accountModel"
 
 export const createAccount = async (account: Account): Promise<void> => {
     const { error } = await supabase
-      .from('accounts')
+      .from("account")
       .insert(account)
 
     if (error) {
-        throw new Error(`An error has occured when creating an account: ${error}`)
+        throw new Error(`An error has occured when creating an account: ${error.message}`)
     }
 }
 
 export const getAccounts = async (): Promise<Account[]> => {
     const { data, error } = await supabase
-      .from('accounts')
-      .select('*')
+      .from("account")
+      .select("*")
 
     if (error) {
-        throw new Error(`An error has occured when retrieving accounts: ${error}`)
+        throw new Error(`An error has occured when retrieving accounts: ${error.message}`)
     }
 
     return data
@@ -25,12 +25,12 @@ export const getAccounts = async (): Promise<Account[]> => {
 
 export const getAccountById = async (id: string): Promise<Account> => {
     const { data, error } = await supabase
-      .from('accounts')
-      .select('*')
-      .eq('id', id)
+      .from("account")
+      .select("*")
+      .eq("id", id)
     
     if (error) {
-        throw new Error(`An error has occured when retrieving an account: ${error}`)
+        throw new Error(`An error has occured when retrieving an account: ${error.message}`)
     }
 
     if (data.length === 0) {
@@ -42,18 +42,18 @@ export const getAccountById = async (id: string): Promise<Account> => {
 
 export const updateAccount = async (id: string, data: Account): Promise<Account> => {
     const { data: updatedData, error } = await supabase
-      .from('accounts')
+      .from("account")
       .update({
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
           password: data.password 
       })
-      .eq('id', id)
+      .eq("id", id)
       .single()
 
       if (error) {
-          throw new Error(`An error has occured when updating an account: ${error}`)
+          throw new Error(`An error has occured when updating an account: ${error.message}`)
       }
 
       if (id === null) {
@@ -65,11 +65,11 @@ export const updateAccount = async (id: string, data: Account): Promise<Account>
 
 export const deleteAccount = async (id: string): Promise<void> => {
     const { error } = await supabase
-      .from('accounts')
+      .from("account")
       .delete()
-      .eq('id', id)
+      .eq("id", id)
 
     if (error) {
-        throw new Error(`An error has occured when deleting an account: ${error}`)
+        throw new Error(`An error has occured when deleting an account: ${error.message}`)
     }
 }

@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 import accountRoutes from "./api/v1/components/account/accountRoutes"
+import organisationRoutes from "./api/v1/components/organisation/organisationRoutes"
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(cors({
 }))
 
 app.use("/api/v1", accountRoutes)
+app.use("/api/v1", organisationRoutes)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)

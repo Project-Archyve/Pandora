@@ -72,24 +72,24 @@ export const deleteOrganisation = async (id: string): Promise<void> => {
     }
 }
 
-export const addAccount = async (organisationId: string, accountId: string): Promise<void> => {
+export const addUser = async (organisationId: string, userId: string): Promise<void> => {
     const { error } = await supabase
-      .from("account_organisation")
-      .insert([{ organisation_id: organisationId, account_id: accountId }])
+      .from("organisation_user")
+      .insert([{ organisation_id: organisationId, user_id: userId }])
 
     if (error) {
-        throw new Error(`An error occured while adding account to organisation: ${error.message}`)
+        throw new Error(`An error occured while adding user to organisation: ${error.message}`)
     }
 }
 
-export const removeAccount = async (organisationId: string, accountId: string): Promise<void> => {
+export const removeUser = async (organisationId: string, userId: string): Promise<void> => {
     const { error } = await supabase
-      .from("account_organisation")
+      .from("organisation_user")
       .delete()
       .eq("organisation_id", organisationId)
-      .eq("account_id", accountId)
+      .eq("user_id", userId)
 
     if (error) {
-        throw new Error(`An error has occured whilst removing account from organisation: ${error.message}`)
+        throw new Error(`An error has occured whilst removing user from organisation: ${error.message}`)
     }
 }

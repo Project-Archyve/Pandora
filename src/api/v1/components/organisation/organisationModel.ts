@@ -1,5 +1,5 @@
-export interface Organisation {
-    id: string;
-    name: string;
-    description: string;
-}
+export type Organisation = {
+  id: string;
+  name: string;
+  description: string;
+};

@@ -8,9 +8,7 @@ export const getProfileById = async (id: string): Promise<Profile> => {
     .eq("id", id);
 
   if (error) {
-    throw new Error(
-      `An error has occured when retrieving a profile: ${error.message}`
-    );
+    throw new Error(`An error has occured when retrieving a profile: ${error.message}`);
   }
 
   if (data.length === 0) {
@@ -20,10 +18,7 @@ export const getProfileById = async (id: string): Promise<Profile> => {
   return data[0];
 };
 
-export const updateProfile = async (
-  id: string,
-  data: Profile
-): Promise<Profile> => {
+export const updateProfile = async (id: string, data: Profile): Promise<Profile> => {
   const { data: updatedProfile, error } = await supabase
     .from("profile")
     .update({
@@ -35,9 +30,7 @@ export const updateProfile = async (
     .single();
 
   if (error) {
-    throw new Error(
-      `An error has occured when updating a profile: ${error.message}`
-    );
+    throw new Error(`An error has occured when updating a profile: ${error.message}`);
   }
 
   if (id === null) {

@@ -1,16 +1,16 @@
-import type { Config } from '@jest/types';
+import type { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
-    testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-    globals: {
-        'ts-jest': {
-            tsconfig: 'tsconfig.json',
-        },
+  preset: "ts-jest",
+  testEnvironment: "node",
+  testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  globals: {
+    "ts-jest": {
+      tsconfig: "tsconfig.json",
     },
-    setupFiles: ['dotenv/config'],
+  },
+  setupFiles: ["dotenv/config"],
 };
 
 export default config;

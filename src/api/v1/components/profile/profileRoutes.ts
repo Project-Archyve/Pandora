@@ -18,9 +18,9 @@ router.get("/profile/:id", async (req: Request, res: Response) => {
 router.put("/profile/:id", async (req: Request, res: Response) => {
   try {
     const profileId = req.params.id;
-    const data = req.body;
+    const data: Profile = req.body;
     const updatedProfile = await updateProfile(profileId, data);
-    res.status(200).json(updateProfile);
+    res.status(200).json(updatedProfile);
   } catch (error) {
     console.error("Error with PUT to /profile/:id route:", error);
     res.status(500).send(error);

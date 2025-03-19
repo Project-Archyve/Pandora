@@ -1,3 +1,4 @@
+import { profile } from "console";
 import supabase from "../../config/supabaseConfig";
 import { Organisation } from "./organisationModel";
 
@@ -19,6 +20,23 @@ export const getOrganisations = async (): Promise<Organisation[]> => {
   return data;
 };
 
+export const getOrganisationsByProfileId = async (profileId: string): Promise<Organisation[]> => {
+  const { data, error } = await supabase
+    .from("organisation_profile")
+    .select("*")
+    .eq("profile_id", profileId)
+
+  if (error) {
+    throw new Error(`An error has occured when retrieving organisations from profile: ${error.message}`);
+  }
+
+  if (data.length === 0) {
+    throw new Error(`Organisations with profile ID ${profileId} cannot be found.`);
+  }
+
+  return data;
+}
+
 export const getOrganisationById = async (id: string): Promise<Organisation> => {
   const { data, error } = await supabase
     .from("organisation")
@@ -39,7 +57,7 @@ export const getOrganisationById = async (id: string): Promise<Organisation> => 
 export const updateOrganisation = async (id: string, data: Organisation): Promise<Organisation> => {
   const { data: updatedData, error } = await supabase
     .from("organisation")
-    .update({ name: data.name, description: data.description })
+    .update({ name: data.name, description: data.description, avatar_url: data.avatar_url })
     .eq("id", id)
     .single();
 
@@ -62,22 +80,22 @@ export const deleteOrganisation = async (id: string): Promise<void> => {
   }
 };
 
-export const addUser = async (organisationId: string, userId: string): Promise<void> => {
+export const addUser = async (organisationId: string, profileId: string): Promise<void> => {
   const { error } = await supabase
-    .from("organisation_user")
-    .insert([{ organisation_id: organisationId, user_id: userId }]);
+    .from("organisation_profile")
+    .insert([{ organisation_id: organisationId, profile_id: profileId }]);
 
   if (error) {
     throw new Error(`An error occured while adding user to organisation: ${error.message}`);
   }
 };
 
-export const removeUser = async (organisationId: string, userId: string): Promise<void> => {
+export const removeUser = async (organisationId: string, profileId: string): Promise<void> => {
   const { error } = await supabase
-    .from("organisation_user")
+    .from("organisation_profile")
     .delete()
     .eq("organisation_id", organisationId)
-    .eq("user_id", userId);
+    .eq("profile_id", profileId);
 
   if (error) {
     throw new Error(`An error has occured whilst removing user from organisation: ${error.message}`);

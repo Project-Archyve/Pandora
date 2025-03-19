@@ -67,3 +67,5 @@ router.delete("/project/:id", async (req: Request, res: Response) => {
     res.status(404).send(error);
   }
 });
+
+export default router;

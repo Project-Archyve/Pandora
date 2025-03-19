@@ -5,6 +5,7 @@ import {
   deleteOrganisation,
   getOrganisationById,
   getOrganisations,
+  getOrganisationsByProfileId,
   removeUser,
   updateOrganisation,
 } from "./organisationController";
@@ -32,6 +33,17 @@ router.get("/organisation", async (_req: Request, res: Response) => {
     res.status(500).send(error);
   }
 });
+
+router.get("/organisation/profile/:id", async (req: Request, res: Response) => {
+  try {
+    const profileId = req.params.id;
+    const organisations = await getOrganisationsByProfileId(profileId);
+    res.status(200).json(organisations);
+  } catch (error) {
+    console.error("Error with GET to /organisation/profil/:id route:", error);
+    res.status(404).send(error);
+  }
+})
 
 router.get("/organisation/:id", async (req: Request, res: Response) => {
   try {

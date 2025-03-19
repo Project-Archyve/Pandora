@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import profileRoutes from "./api/v1/components/profile/profileRoutes";
+import projectRoutes from "./api/v1/components/project/projectRoutes";
+import artefactRoutes from "./api/v1/components/artefact/artefactRoutes";
 import organisationRoutes from "./api/v1/components/organisation/organisationRoutes";
 
 dotenv.config();
@@ -15,13 +17,15 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:3000",
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     allowedHeaders: "Content-Type, Authorization",
   })
 );
 
 app.use(apiRoute, profileRoutes);
+app.use(apiRoute, projectRoutes);
+app.use(apiRoute, artefactRoutes);
 app.use(apiRoute, organisationRoutes);
 
 app.listen(port, () => {
